@@ -1,6 +1,3 @@
-from . import globals
-
-
 def coordinates_to_direction(my_x, my_y, target_x, target_y):
     """
     :param MUST BE IN A STRAIGHT LINE
