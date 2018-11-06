@@ -1,4 +1,4 @@
-from . import globals
+from . import global_constants
 
 
 def target_in_straight_line(my_x, my_y, target_x, target_y):

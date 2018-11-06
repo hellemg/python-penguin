@@ -3,7 +3,7 @@ import json
 import random
 import math
 
-from .globals import *
+from .global_constants import *
 from .basic import *
 from .inFrontOfMe import *
 

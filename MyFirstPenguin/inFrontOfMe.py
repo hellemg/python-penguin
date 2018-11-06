@@ -1,4 +1,4 @@
-from . import globals
+from . import global_constants
 import numpy as np
 
 def in_front_of_me(body):
