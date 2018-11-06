@@ -79,4 +79,6 @@ def in_front_of_me(body):
                 item_x = item["x"]
                 if item_x > 0:
                     my_list.append((penguinPositionX - item_x, "bonusTiles"))
-    return my_list
+
+
+    return sorted(my_list)
