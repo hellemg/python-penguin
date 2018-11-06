@@ -58,7 +58,10 @@ def chooseAction(body):
     if can_shoot_enemy(body, in_front_of_me(body)):
         action = SHOOT
     else:
-        action = moveTowardsPoint(body, body['enemies'][0]['x'], body['enemies'][0]['y'])
+        if 'x' in body["enemies"][0].keys():
+            action = moveTowardsPoint(body, body['enemies'][0]['x'], body['enemies'][0]['y'])
+        else:
+            action = moveTowardsCenterOfMap(body)
     return action
 
 env = os.environ
