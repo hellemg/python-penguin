@@ -1,4 +1,4 @@
-import global_constants
+from global_constants import *
 
 def in_front_of_me(body):
     """

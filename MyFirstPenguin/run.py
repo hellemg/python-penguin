@@ -7,6 +7,7 @@ from global_constants import *
 from basic import *
 from inFrontOfMe import *
 
+
 def doesCellContainWall(walls, x, y):
     for wall in walls:
         if wall["x"] == x and wall["y"] == y:
