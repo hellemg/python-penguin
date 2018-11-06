@@ -3,7 +3,9 @@ import json
 import random
 import math
 
-from . import globals
+from .globals import *
+from .basic import *
+from .inFrontOfMe import *
 
 def doesCellContainWall(walls, x, y):
     for wall in walls:
@@ -52,7 +54,9 @@ def moveTowardsCenterOfMap(body):
 
 def chooseAction(body):
     action = PASS
-    action = moveTowardsCenterOfMap(body)
+    action = moveTowardsPoint(body, body['enemy']['x'], body['enemy']['y'])
+    if can_shoot_enemy(body, in_front_of_me(body)):
+        action = SHOOT
     return action
 
 env = os.environ
