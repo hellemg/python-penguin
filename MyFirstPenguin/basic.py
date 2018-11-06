@@ -26,8 +26,10 @@ def can_shoot_enemy(body, infront_list):
     :return: True if can shoot enemy, False if not
     """
 
+    print(infront_list)
     for i in range(len(infront_list)):
         if infront_list[i][1] == 'enemies' and infront_list[i][0] <= body['you']['weaponRange']:
+            print("can shoot!")
             return True
 
     return False
