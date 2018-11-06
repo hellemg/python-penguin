@@ -2,7 +2,7 @@ from run import *
 from basic import *
 
 
-def num_moves_required_to_get_to_target(body, target_x, target_y):
+def num_moves_to_target(body, target_x, target_y):
     """
     :param body: json body
     :param target: body['target']
