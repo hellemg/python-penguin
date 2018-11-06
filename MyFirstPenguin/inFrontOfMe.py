@@ -1,5 +1,4 @@
-from . import global_constants
-import numpy as np
+import global_constants
 
 def in_front_of_me(body):
     """
