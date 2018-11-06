@@ -10,6 +10,7 @@ def in_front_of_me(body):
     penguinPositionX = body["you"]["x"]
     penguinPositionY = body["you"]["y"]
     bodyDirection = body["you"]["direction"]
+    print("body_dir: ", bodyDirection)
     returnstuff = []
     enemies = body["enemies"]
     walls = body["walls"]
