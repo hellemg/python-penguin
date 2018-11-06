@@ -55,9 +55,10 @@ def moveTowardsCenterOfMap(body):
 
 def chooseAction(body):
     action = PASS
-    action = moveTowardsPoint(body, body['enemies'][0]['x'], body['enemies'][0]['y'])
     if can_shoot_enemy(body, in_front_of_me(body)):
         action = SHOOT
+    else:
+        action = moveTowardsPoint(body, body['enemies'][0]['x'], body['enemies'][0]['y'])
     return action
 
 env = os.environ
