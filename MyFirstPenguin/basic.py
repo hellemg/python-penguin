@@ -19,3 +19,18 @@ def coordinates_to_direction(my_x, my_y, target_x, target_y):
         return 'bottom'
 
 
+def can_shoot_enemy(body, infront_list):
+    """
+    :param body:
+    :param infront_list: list from inFrontOfMe.py
+    :return: True if can shoot enemy, False if not
+    """
+    i = 0
+    while infront_list[i][0] <= body['you']['weaponRange']:
+        if infront_list[i][1] == 'wall':
+            break
+        elif infront_list[i][1] == 'enemy':
+            return True
+        i += 1
+    return False
+
