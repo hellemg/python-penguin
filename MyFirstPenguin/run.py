@@ -54,6 +54,16 @@ def moveTowardsCenterOfMap(body):
     centerPointY = math.floor(body["mapHeight"] / 2)
     return moveTowardsPoint(body, centerPointX, centerPointY)
 
+def coordinates_to_dir(body, item_x, item_y, penguinPositionX, penguinPositionY):
+    centerPointX = math.floor(body["mapWidth"] / 2)
+    centerPointY = math.floor(body["mapHeight"] / 2)
+    #Defining offset to be positive for coords larger than centre
+    #Larger x -> smaller right, Larger y -> smaller bottom
+    offset_x = item_x - centerPointX
+    offset_y = item_y - centerPointY
+    max = centerPointY*2 - offset_x - offset_y
+    line_one
+
 def chooseAction(body):
     action = PASS
     if can_shoot_enemy(body, in_front_of_me(body)):
