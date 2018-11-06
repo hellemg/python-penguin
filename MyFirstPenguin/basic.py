@@ -19,6 +19,17 @@ def coordinates_to_direction(my_x, my_y, target_x, target_y):
         return 'bottom'
 
 
+def direction_to_coord_tuple(direction):
+    if direction == 'right':
+        return (1, 0)
+    if direction == 'left':
+        return (-1, 0)
+    if direction == 'top':
+        return (0, 1)
+    if direction == 'bottom':
+        return (0, -1)
+
+
 def can_shoot_enemy(body, infront_list):
     """
     :param body:
@@ -29,7 +40,6 @@ def can_shoot_enemy(body, infront_list):
     print(infront_list)
     for i in range(len(infront_list)):
         if infront_list[i][1] == 'enemies' and infront_list[i][0] <= body['you']['weaponRange']:
-            print("can shoot!")
             return True
 
     return False

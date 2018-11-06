@@ -6,6 +6,7 @@ import math
 from global_constants import *
 from basic import *
 from inFrontOfMe import *
+from moves_required import *
 
 
 def doesCellContainWall(walls, x, y):
@@ -70,6 +71,13 @@ def chooseAction(body):
     else:
         if 'x' in body["enemies"][0].keys():
             action = moveTowardsPoint(body, body['enemies'][0]['x'], body['enemies'][0]['y'])
+        elif body.get("bonusTiles", None):
+            bonus_tiles = body['bonusTiles']
+            print(bonus_tiles)
+            bonus_tile_ranges = [num_moves_to_target(body, t['x'], t['y']) for t in bonus_tiles]
+            closest_bonus_tile_index = bonus_tile_ranges.index(min(bonus_tile_ranges))
+            closest_bonus_tile = bonus_tiles[closest_bonus_tile_index]
+            action = moveTowardsPoint(body, closest_bonus_tile['x'], closest_bonus_tile['y'])
         else:
             action = moveTowardsCenterOfMap(body)
     return action
