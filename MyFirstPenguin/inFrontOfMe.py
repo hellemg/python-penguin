@@ -16,10 +16,11 @@ def in_front_of_me(body):
     my_list = []
     if bodyDirection == "top":
         for item in enemies:
-            if item['x'] == penguinPositionX:
-                item_y = item["y"]
-                if item_y > 0:
-                    my_list.append((item_y-penguinPositionY, "enemies"))
+            if "x" in item.keys():
+                if item['x'] == penguinPositionX:
+                    item_y = item["y"]
+                    if item_y > 0:
+                        my_list.append((item_y-penguinPositionY, "enemies"))
         for item in walls:
             if item['x'] == penguinPositionX:
                 item_y = item["y"]
@@ -32,10 +33,11 @@ def in_front_of_me(body):
                     my_list.append((item_y-penguinPositionY, "bonusTiles"))
     elif bodyDirection == "bottom":
         for item in enemies:
-            if item['x'] == penguinPositionX:
-                item_y = item["y"]
-                if item_y < 0:
-                    my_list.append((penguinPositionY-item_y, "enemies"))
+            if "x" in item.keys():
+                if item['x'] == penguinPositionX:
+                    item_y = item["y"]
+                    if item_y < 0:
+                        my_list.append((penguinPositionY-item_y, "enemies"))
         for item in walls:
             if item['x'] == penguinPositionX:
                 item_y = item["y"]
@@ -48,10 +50,11 @@ def in_front_of_me(body):
                     my_list.append((penguinPositionY-item_y, "bonusTiles"))
     elif bodyDirection == "left":
         for item in enemies:
-            if item['y'] == penguinPositionY:
-                item_x = item["x"]
-                if item_x < 0:
-                    my_list.append((penguinPositionX-item_x, "enemies"))
+            if "x" in item.keys():
+                if item['y'] == penguinPositionY:
+                    item_x = item["x"]
+                    if item_x < 0:
+                        my_list.append((penguinPositionX-item_x, "enemies"))
         for item in walls:
             if item['y'] == penguinPositionY:
                 item_x = item["x"]
@@ -64,10 +67,11 @@ def in_front_of_me(body):
                     my_list.append((penguinPositionX-item_x, "bonusTiles"))
     elif bodyDirection == "right":
         for item in enemies:
-            if item['y'] == penguinPositionY:
-                item_x = item["x"]
-                if item_x > 0:
-                    my_list.append((penguinPositionX - item_x, "enemies"))
+            if "x" in item.keys():
+                if item['y'] == penguinPositionY:
+                    item_x = item["x"]
+                    if item_x > 0:
+                        my_list.append((penguinPositionX - item_x, "enemies"))
         for item in walls:
             if item['y'] == penguinPositionY:
                 item_x = item["x"]
@@ -78,6 +82,5 @@ def in_front_of_me(body):
                 item_x = item["x"]
                 if item_x > 0:
                     my_list.append((penguinPositionX - item_x, "bonusTiles"))
-
 
     return sorted(my_list)
