@@ -3,7 +3,7 @@ import json
 import random
 import math
 
-from . import globals
+from .globals import *
 
 def doesCellContainWall(walls, x, y):
     for wall in walls:
