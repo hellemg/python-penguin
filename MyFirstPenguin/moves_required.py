@@ -1,5 +1,3 @@
-from . import global_constants
-from . import inFrontOfMe
 
 def num_moves_required_to_get_to_target(body, target_x, target_y):
     """
