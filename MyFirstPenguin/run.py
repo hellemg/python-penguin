@@ -6,6 +6,7 @@ import math
 from global_constants import *
 from basic import *
 from inFrontOfMe import *
+from moves_required import *
 
 
 def doesCellContainWall(walls, x, y):
