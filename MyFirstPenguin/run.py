@@ -67,7 +67,7 @@ def moveTowardsPoint(body, pointX, pointY):
     penguinPositionY = body["you"]["y"]
     plannedAction = PASS
     bodyDirection = body["you"]["direction"]
-    """
+
     item_dir = coordinates_to_dir(body, pointX, pointY, penguinPositionX, penguinPositionY)
 
     if item_dir == bodyDirection:
@@ -80,18 +80,17 @@ def moveTowardsPoint(body, pointX, pointY):
         elif bodyDirection == "right":
             plannedAction = MOVE_RIGHT[bodyDirection]
     else:
-    """
-    if penguinPositionX < pointX:
-        plannedAction = MOVE_RIGHT[bodyDirection]
-    elif penguinPositionX > pointX:
-        plannedAction = MOVE_LEFT[bodyDirection]
-    elif penguinPositionY < pointY:
-        plannedAction = MOVE_DOWN[bodyDirection]
-    elif penguinPositionY > pointY:
-        plannedAction = MOVE_UP[bodyDirection]
+        if penguinPositionX < pointX:
+            plannedAction = MOVE_RIGHT[bodyDirection]
+        elif penguinPositionX > pointX:
+            plannedAction = MOVE_LEFT[bodyDirection]
+        elif penguinPositionY < pointY:
+            plannedAction = MOVE_DOWN[bodyDirection]
+        elif penguinPositionY > pointY:
+            plannedAction = MOVE_UP[bodyDirection]
 
-    if plannedAction == ADVANCE and wallInFrontOfPenguin(body):
-        plannedAction = SHOOT
+        if plannedAction == ADVANCE and wallInFrontOfPenguin(body):
+            plannedAction = SHOOT
     return plannedAction
 
 
