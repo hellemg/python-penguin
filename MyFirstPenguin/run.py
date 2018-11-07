@@ -25,18 +25,19 @@ def num_moves_to_target(body, target_x, target_y):
     dir_x, dir_y = direction_to_coord_tuple(direction)
 
     if diff_x != 0:
-        diff_x_sign = diff_x/abs(diff_x)
+        diff_x_sign = diff_x / abs(diff_x)
     else:
         diff_x_sign = 0
 
     if diff_y != 0:
-        diff_y_sign = diff_y/abs(diff_y)
+        diff_y_sign = diff_y / abs(diff_y)
     else:
         diff_y_sign = 0
 
     turn = diff_y_sign != dir_y + diff_x_sign != diff_x_sign
 
     return turn + abs(diff_x) + abs(diff_y)
+
 
 def doesCellContainWall(walls, x, y):
     for wall in walls:
@@ -69,16 +70,24 @@ def moveTowardsPoint(body, pointX, pointY):
 
     item_dir = coordinates_to_dir(body, pointX, pointY, penguinPositionX, penguinPositionY)
 
-    # TODO: If penguin
-
-    if penguinPositionX < pointX:
-        plannedAction = MOVE_RIGHT[bodyDirection]
-    elif penguinPositionX > pointX:
-        plannedAction = MOVE_LEFT[bodyDirection]
-    elif penguinPositionY < pointY:
-        plannedAction = MOVE_DOWN[bodyDirection]
-    elif penguinPositionY > pointY:
-        plannedAction = MOVE_UP[bodyDirection]
+    if item_dir == bodyDirection:
+        if bodyDirection == "top":
+            plannedAction = MOVE_UP[bodyDirection]
+        elif bodyDirection == "bottom":
+            plannedAction = MOVE_DOWN[bodyDirection]
+        elif bodyDirection == "left":
+            plannedAction = MOVE_LEFT[bodyDirection]
+        elif bodyDirection == "right":
+            plannedAction = MOVE_RIGHT[bodyDirection]
+    else:
+        if penguinPositionX < pointX:
+            plannedAction = MOVE_RIGHT[bodyDirection]
+        elif penguinPositionX > pointX:
+            plannedAction = MOVE_LEFT[bodyDirection]
+        elif penguinPositionY < pointY:
+            plannedAction = MOVE_DOWN[bodyDirection]
+        elif penguinPositionY > pointY:
+            plannedAction = MOVE_UP[bodyDirection]
 
     if plannedAction == ADVANCE and wallInFrontOfPenguin(body):
         plannedAction = SHOOT
@@ -99,8 +108,8 @@ def coordinates_to_dir(body, item_x, item_y, penguinPositionX, penguinPositionY)
     offset_x = item_x - centerPointX
     offset_y = item_y - centerPointY
     max = centerPointY * 2 - offset_x - offset_y
-    f1 = lambda y : y + offset_x - offset_y
-    f2 = lambda y : max - offset_x - offset_y - y
+    f1 = lambda y: y + offset_x - offset_y
+    f2 = lambda y: max - offset_x - offset_y - y
     if item_y >= penguinPositionY:
         if item_x > f1(item_y):
             return 'right'
@@ -113,8 +122,6 @@ def coordinates_to_dir(body, item_x, item_y, penguinPositionX, penguinPositionY)
         elif item_x < f1(item_y):
             return 'left'
         return 'top'
-
-
 
 
 def chooseAction(body):
