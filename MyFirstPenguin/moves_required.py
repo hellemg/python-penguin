@@ -18,20 +18,15 @@ def num_moves_to_target(body, target_x, target_y):
 
     dir_x, dir_y = direction_to_coord_tuple(direction)
 
-    if diff_x != 0:
-        diff_x_sign = diff_x/abs(diff_x)
-    else:
-        diff_x_sign = 0
-
-    if diff_y != 0:
-        diff_y_sign = diff_y/abs(diff_y)
-    else:
-        diff_y_sign = 0
-
-    turn = int(diff_y_sign != dir_y) + int(diff_x_sign != diff_x_sign)
+    turn = calc_turning_required(diff_x, diff_y, dir_x, dir_y)
 
     return turn + abs(diff_x) + abs(diff_y)
 
 
-    
+def calc_turning_required(diff_x, diff_y, dir_x, dir_y):
+    if diff_x != 0:
+        diff_x = diff_x/abs(diff_x)
+    if diff_y != 0:
+        diff_y = diff_y/abs(diff_y)
+    return int(diff_x != dir_x) + int(diff_y != dir_y)
 
