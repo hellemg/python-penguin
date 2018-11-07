@@ -98,20 +98,20 @@ def moveTowardsPoint(body, pointX, pointY):
 
 
 def moveTowardsCenterOfMap(body):
-    centerPointX = math.floor(body["mapWidth"] / 2)
-    centerPointY = math.floor(body["mapHeight"] / 2)
+    centerPointX = math.ceil(body["mapWidth"] / 2)
+    centerPointY = math.ceil(body["mapHeight"] / 2)
     return moveTowardsPoint(body, centerPointX, centerPointY)
 
 
 def coordinates_to_dir(body, item_x, item_y, penguinPositionX, penguinPositionY):
-    centerPointX = math.floor(body["mapWidth"] / 2)
-    centerPointY = math.floor(body["mapHeight"] / 2)
+    centerPointX = math.ceil(body["mapWidth"] / 2)
+    centerPointY = math.ceil(body["mapHeight"] / 2)
     # Defining offset to be positive for coords larger than centre
     # Larger x -> smaller right, Larger y -> smaller bottom
     offset_x = item_x - centerPointX
     offset_y = item_y - centerPointY
     max = centerPointY * 2 - offset_x - offset_y
-    f1 = lambda y: y + offset_x - offset_y
+    f1 = lambda y: offset_y - offset_x + y
     f2 = lambda y: max - offset_x - offset_y - y
     if item_y >= penguinPositionY:
         if item_x > f1(item_y):
