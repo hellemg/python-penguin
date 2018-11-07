@@ -105,8 +105,8 @@ def coordinates_to_dir(body, item_x, item_y, penguinPositionX, penguinPositionY)
     centerPointY = math.floor(body["mapHeight"] / 2)
     # Defining offset to be positive for coords larger than centre
     # Larger x -> smaller right, Larger y -> smaller bottom
-    offset_x = penguinPositionX - centerPointX
-    offset_y = penguinPositionY - centerPointY
+    offset_x = item_x - centerPointX
+    offset_y = item_y - centerPointY
     max = centerPointY * 2 - offset_x - offset_y
     f1 = lambda y: y + offset_x - offset_y
     f2 = lambda y: max - offset_x - offset_y - y
@@ -134,11 +134,11 @@ def chooseAction(body):
         elif body.get("bonusTiles", None):
             bonus_tiles = body['bonusTiles']
             bonus_tile_ranges = [num_moves_to_target(body, t['x'], t['y']) for t in bonus_tiles]
-            print(bonus_tiles)
-            print(bonus_tile_ranges)
+            print("bonus tiles:", bonus_tiles)
+            print("bonues tile ranges", bonus_tile_ranges)
             closest_bonus_tile_index = bonus_tile_ranges.index(min(bonus_tile_ranges))
             closest_bonus_tile = bonus_tiles[closest_bonus_tile_index]
-            print(closest_bonus_tile_index)
+            print("closest tile index", closest_bonus_tile_index)
             action = moveTowardsPoint(body, closest_bonus_tile['x'], closest_bonus_tile['y'])
         else:
             action = moveTowardsCenterOfMap(body)
