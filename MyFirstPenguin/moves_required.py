@@ -28,7 +28,7 @@ def num_moves_to_target(body, target_x, target_y):
     else:
         diff_y_sign = 0
 
-    turn = (diff_y_sign != dir_y) + (diff_x_sign != diff_x_sign)
+    turn = int(diff_y_sign != dir_y) + int(diff_x_sign != diff_x_sign)
 
     return turn + abs(diff_x) + abs(diff_y)
 
