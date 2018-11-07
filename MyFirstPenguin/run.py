@@ -85,6 +85,11 @@ def moveTowardsPoint(body, pointX, pointY):
 
 
     item_dir = coordinates_to_dir(body, pointX, pointY, penguinPositionX, penguinPositionY)
+
+
+    dir_diff_x = direction_to_coord_tuple(item_dir)[0] + direction_to_coord_tuple(bodyDirection)[0]
+    dir_diff_y = direction_to_coord_tuple(item_dir)[1] + direction_to_coord_tuple(bodyDirection)[1]
+    
     print("Item dir:", item_dir)
     print("Item coord:", pointX ,",", pointY)
     print("body dir:", bodyDirection)
@@ -99,8 +104,6 @@ def moveTowardsPoint(body, pointX, pointY):
         elif bodyDirection == "right":
             plannedAction = MOVE_RIGHT[bodyDirection]
 
-    dir_diff_x = direction_to_coord_tuple(item_dir)[0] + direction_to_coord_tuple(bodyDirection)[0]
-    dir_diff_y = direction_to_coord_tuple(item_dir)[1] + direction_to_coord_tuple(bodyDirection)[1]
 
     elif (dir_diff_x == 0 and dir_diff_y == 0) and not wallInBehindPenguin(body):
         plannedAction = RETREAT
