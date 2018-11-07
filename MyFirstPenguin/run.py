@@ -89,7 +89,7 @@ def moveTowardsPoint(body, pointX, pointY):
 
     dir_diff_x = direction_to_coord_tuple(item_dir)[0] + direction_to_coord_tuple(bodyDirection)[0]
     dir_diff_y = direction_to_coord_tuple(item_dir)[1] + direction_to_coord_tuple(bodyDirection)[1]
-    
+
     print("Item dir:", item_dir)
     print("Item coord:", pointX ,",", pointY)
     print("body dir:", bodyDirection)
@@ -192,8 +192,8 @@ responseBody = open(env['res'], 'w')
 response = {}
 returnObject = {}
 if req_params_query == "info":
-    returnObject["name"] = "Pingu"
-    returnObject["team"] = "Team Python"
+    returnObject["name"] = "Noot-noot"
+    returnObject["team"] = "Tenkepause"
 elif req_params_query == "command":
     body = json.loads(open(env["req"], "r").read())
     returnObject["command"] = chooseAction(body)
