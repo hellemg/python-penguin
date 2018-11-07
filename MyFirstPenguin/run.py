@@ -68,6 +68,7 @@ def moveTowardsPoint(body, pointX, pointY):
     plannedAction = PASS
     bodyDirection = body["you"]["direction"]
 
+
     item_dir = coordinates_to_dir(body, pointX, pointY, penguinPositionX, penguinPositionY)
     print("Item dir:", item_dir)
     print("Item coord:", pointX ,",", pointY)
@@ -83,6 +84,7 @@ def moveTowardsPoint(body, pointX, pointY):
         elif bodyDirection == "right":
             plannedAction = MOVE_RIGHT[bodyDirection]
     else:
+
         if penguinPositionX < pointX:
             plannedAction = MOVE_RIGHT[bodyDirection]
         elif penguinPositionX > pointX:
@@ -108,27 +110,28 @@ def coordinates_to_dir(body, item_x, item_y, penguinPositionX, penguinPositionY)
     centerPointY = math.ceil(body["mapHeight"] / 2)
     # Defining offset to be positive for coords larger than centre
     # Larger x -> smaller right, Larger y -> smaller bottom
-    offset_x = item_x - centerPointX
-    offset_y = item_y - centerPointY
-    max = centerPointY * 2 - offset_x - offset_y
+    offset_x = item_x - penguinPositionX
+    offset_y = item_y - penguinPositionY
+    h = body["mapHeight"] - offset_x - offset_y
+    print("h:", h, " o_x:", offset_x, " o_y:", offset_y)
     f1 = lambda y: offset_y - offset_x + y
-    f2 = lambda y: max - offset_x - offset_y - y
+    f2 = lambda y: h - offset_x - offset_y - y
     if item_y >= penguinPositionY:
         print("Bottom half")
         print("f1(y):", f1(item_y), "item_x:", item_x)
         print("f2(y):", f2(item_y), "item_x:", item_x)
-        if item_x > f1(item_y):
+        if item_x >= f1(item_y):
             return 'right'
-        elif item_x < f2(item_y):
+        elif item_x <= f2(item_y):
             return 'left'
         return 'bottom'
     else:
         print("Top half")
         print("f1(y):", f1(item_y), "item_x:", item_x)
         print("f2(y):", f2(item_y), "item_x:", item_x)
-        if item_x > f2(item_y):
+        if item_x >= f2(item_y):
             return 'right'
-        elif item_x < f1(item_y):
+        elif item_x <= f1(item_y):
             return 'left'
         return 'top'
 
