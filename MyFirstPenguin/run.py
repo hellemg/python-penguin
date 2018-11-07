@@ -127,8 +127,11 @@ def chooseAction(body):
         elif body.get("bonusTiles", None):
             bonus_tiles = body['bonusTiles']
             bonus_tile_ranges = [num_moves_to_target(body, t['x'], t['y']) for t in bonus_tiles]
+            print(bonus_tiles)
+            print(bonus_tile_ranges)
             closest_bonus_tile_index = bonus_tile_ranges.index(min(bonus_tile_ranges))
             closest_bonus_tile = bonus_tiles[closest_bonus_tile_index]
+            print(closest_bonus_tile_index)
             action = moveTowardsPoint(body, closest_bonus_tile['x'], closest_bonus_tile['y'])
         else:
             action = moveTowardsCenterOfMap(body)
