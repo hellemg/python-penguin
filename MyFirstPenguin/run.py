@@ -105,8 +105,8 @@ def coordinates_to_dir(body, item_x, item_y, penguinPositionX, penguinPositionY)
     centerPointY = math.floor(body["mapHeight"] / 2)
     # Defining offset to be positive for coords larger than centre
     # Larger x -> smaller right, Larger y -> smaller bottom
-    offset_x = item_x - centerPointX
-    offset_y = item_y - centerPointY
+    offset_x = penguinPositionX - centerPointX
+    offset_y = penguinPositionY - centerPointY
     max = centerPointY * 2 - offset_x - offset_y
     f1 = lambda y: y + offset_x - offset_y
     f2 = lambda y: max - offset_x - offset_y - y
