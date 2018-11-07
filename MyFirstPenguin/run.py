@@ -137,7 +137,6 @@ def chooseAction(body):
         elif body.get("bonusTiles", None):
             bonus_tiles = body['bonusTiles']
             bonus_tile_ranges = [num_moves_to_target(body, t['x'], t['y']) for t in bonus_tiles]
-            print("bonus tiles:", bonus_tiles)
             print("bonues tile ranges", bonus_tile_ranges)
             closest_bonus_tile_index = bonus_tile_ranges.index(min(bonus_tile_ranges))
             closest_bonus_tile = bonus_tiles[closest_bonus_tile_index]
