@@ -83,8 +83,17 @@ def moveTowardsPoint(body, pointX, pointY):
             plannedAction = MOVE_LEFT[bodyDirection]
         elif bodyDirection == "right":
             plannedAction = MOVE_RIGHT[bodyDirection]
-    else:
 
+    elif item_dir == "bottom" and bodyDirection == "top":
+        plannedAction = RETREAT
+    elif item_dir == "top" and bodyDirection == "bottom":
+        plannedAction = RETREAT
+    elif item_dir == "right" and bodyDirection == "left":
+        plannedAction = RETREAT
+    elif item_dir == "left" and bodyDirection == "right":
+        plannedAction = RETREAT
+
+    else:
         if penguinPositionX < pointX:
             plannedAction = MOVE_RIGHT[bodyDirection]
         elif penguinPositionX > pointX:
@@ -93,6 +102,7 @@ def moveTowardsPoint(body, pointX, pointY):
             plannedAction = MOVE_DOWN[bodyDirection]
         elif penguinPositionY > pointY:
             plannedAction = MOVE_UP[bodyDirection]
+
 
     if plannedAction == ADVANCE and wallInFrontOfPenguin(body):
         plannedAction = SHOOT
