@@ -11,6 +11,7 @@ def num_moves_to_target(body, target_x, target_y):
 
     my_x = body['you']['x']
     my_y = body['you']['y']
+    direction = body['you']['direction']
 
     diff_x = target_x - my_x
     diff_y = target_y - my_y

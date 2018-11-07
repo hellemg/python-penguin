@@ -6,8 +6,37 @@ import math
 from global_constants import *
 from basic import *
 from inFrontOfMe import *
-from moves_required import *
 
+
+def num_moves_to_target(body, target_x, target_y):
+    """
+    :param body: json body
+    :param target: body['target']
+    :return: int, num moves required to get to a certain target
+    """
+
+    my_x = body['you']['x']
+    my_y = body['you']['y']
+    direction = body['you']['direction']
+
+    diff_x = target_x - my_x
+    diff_y = target_y - my_y
+
+    dir_x, dir_y = direction_to_coord_tuple(direction)
+
+    if diff_x != 0:
+        diff_x_sign = diff_x/abs(diff_x)
+    else:
+        diff_x_sign = 0
+
+    if diff_y != 0:
+        diff_y_sign = diff_y/abs(diff_y)
+    else:
+        diff_y_sign = 0
+
+    turn = diff_y_sign != dir_y + diff_x_sign != diff_x_sign
+
+    return turn + abs(diff_x) + abs(diff_y)
 
 def doesCellContainWall(walls, x, y):
     for wall in walls:
@@ -97,7 +126,6 @@ def chooseAction(body):
             action = moveTowardsPoint(body, body['enemies'][0]['x'], body['enemies'][0]['y'])
         elif body.get("bonusTiles", None):
             bonus_tiles = body['bonusTiles']
-            print(bonus_tiles)
             bonus_tile_ranges = [num_moves_to_target(body, t['x'], t['y']) for t in bonus_tiles]
             closest_bonus_tile_index = bonus_tile_ranges.index(min(bonus_tile_ranges))
             closest_bonus_tile = bonus_tiles[closest_bonus_tile_index]
