@@ -20,7 +20,7 @@ def num_moves_to_target(body, target_x, target_y):
 
     turn = calc_turning_required(diff_x, diff_y, dir_x, dir_y)
 
-    return abs(diff_x) + abs(diff_y)
+    return turn + abs(diff_x) + abs(diff_y)
 
 
 def calc_turning_required(diff_x, diff_y, dir_x, dir_y):
