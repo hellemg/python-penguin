@@ -114,12 +114,18 @@ def coordinates_to_dir(body, item_x, item_y, penguinPositionX, penguinPositionY)
     f1 = lambda y: offset_y - offset_x + y
     f2 = lambda y: max - offset_x - offset_y - y
     if item_y >= penguinPositionY:
+        print("Bottom half")
+        print("f1(y):", f1(item_y), "item_x:", item_x)
+        print("f2(y):", f2(item_y), "item_x:", item_x)
         if item_x > f1(item_y):
             return 'right'
         elif item_x < f2(item_y):
             return 'left'
         return 'bottom'
     else:
+        print("Top half")
+        print("f1(y):", f1(item_y), "item_x:", item_x)
+        print("f2(y):", f2(item_y), "item_x:", item_x)
         if item_x > f2(item_y):
             return 'right'
         elif item_x < f1(item_y):
