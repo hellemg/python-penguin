@@ -149,6 +149,7 @@ def chooseAction(body):
             print("closest tile", "x:", closest_bonus_tile['x'], "y:", closest_bonus_tile['y'])
             action = moveTowardsPoint(body, closest_bonus_tile['x'], closest_bonus_tile['y'])
         else:
+            print("move to center of map")
             action = moveTowardsCenterOfMap(body)
     return action
 
