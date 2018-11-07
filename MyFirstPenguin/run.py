@@ -174,7 +174,7 @@ def chooseAction(body):
     if can_shoot_enemy(body, in_front_of_me(body)):
         action = SHOOT
     else:
-        if 'x' in body["enemies"][0].keys() and not enemy_far():
+        if 'x' in body["enemies"][0].keys() and not enemy_far(body["you"]["x"], body["you"]["y"], body['enemies'][0]['x'], body['enemies'][0]['y']):
             action = moveTowardsPoint(body, body['enemies'][0]['x'], body['enemies'][0]['y'])
         elif body.get("bonusTiles", None):
             bonus_tiles = body['bonusTiles']
