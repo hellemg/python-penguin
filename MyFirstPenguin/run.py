@@ -61,6 +61,7 @@ def wallInFrontOfPenguin(body):
         xValueToCheckForWall += 1
     return doesCellContainWall(body["walls"], xValueToCheckForWall, yValueToCheckForWall)
 
+
 def wallInBehindPenguin(body):
     xValueToCheckForWall = body["you"]["x"]
     yValueToCheckForWall = body["you"]["y"]
@@ -83,15 +84,13 @@ def moveTowardsPoint(body, pointX, pointY):
     plannedAction = PASS
     bodyDirection = body["you"]["direction"]
 
-
     item_dir = coordinates_to_dir(body, pointX, pointY, penguinPositionX, penguinPositionY)
-
 
     dir_diff_x = direction_to_coord_tuple(item_dir)[0] + direction_to_coord_tuple(bodyDirection)[0]
     dir_diff_y = direction_to_coord_tuple(item_dir)[1] + direction_to_coord_tuple(bodyDirection)[1]
 
     print("Item dir:", item_dir)
-    print("Item coord:", pointX ,",", pointY)
+    print("Item coord:", pointX, ",", pointY)
     print("body dir:", bodyDirection)
     print("body coord:", penguinPositionX, ",", penguinPositionY)
     if item_dir == bodyDirection:
@@ -118,7 +117,6 @@ def moveTowardsPoint(body, pointX, pointY):
         elif penguinPositionY > pointY:
             plannedAction = MOVE_UP[bodyDirection]
 
-
     if plannedAction == ADVANCE and wallInFrontOfPenguin(body):
         plannedAction = SHOOT
     return plannedAction
@@ -131,19 +129,19 @@ def moveTowardsCenterOfMap(body):
 
 
 def coordinates_to_dir(body, item_x, item_y, penguinPositionX, penguinPositionY):
-    dist_x = abs(penguinPositionX-item_x)
-    dist_y = abs(penguinPositionY-item_y)
+    dist_x = abs(penguinPositionX - item_x)
+    dist_y = abs(penguinPositionY - item_y)
     if item_y >= penguinPositionY:
         print("Bottom half")
         if item_x < penguinPositionX:
             print("Left quarter")
-            if dist_x >dist_y:
+            if dist_x > dist_y:
                 return "left"
             else:
                 return "bottom"
         else:
             print("Right quarter")
-            if dist_x>dist_y:
+            if dist_x > dist_y:
                 return "right"
             else:
                 return "bottom"
@@ -151,17 +149,24 @@ def coordinates_to_dir(body, item_x, item_y, penguinPositionX, penguinPositionY)
         print("top half")
         if item_x < penguinPositionX:
             print("Left quarter")
-            if dist_x >dist_y:
+            if dist_x > dist_y:
                 return "left"
             else:
                 return "top"
         else:
             print("Right quarter")
-            if dist_x>dist_y:
+            if dist_x > dist_y:
                 return "right"
             else:
                 return "top"
 
+
+def enemy_far(penguinPositionX, penguinPositionY, enemy_x, enemy_y, dist_tres = 6, diff_tres = 2):
+    dist_x = abs(penguinPositionX - enemy_x)
+    dist_y = abs(penguinPositionY - enemy_y)
+    distance = dist_x + dist_y
+    difference = abs(dist_x - dist_y)
+    return distance > dist_tres and difference <= diff_tres
 
 
 def chooseAction(body):
@@ -169,7 +174,7 @@ def chooseAction(body):
     if can_shoot_enemy(body, in_front_of_me(body)):
         action = SHOOT
     else:
-        if 'x' in body["enemies"][0].keys():
+        if 'x' in body["enemies"][0].keys() and not enemy_far():
             action = moveTowardsPoint(body, body['enemies'][0]['x'], body['enemies'][0]['y'])
         elif body.get("bonusTiles", None):
             bonus_tiles = body['bonusTiles']
