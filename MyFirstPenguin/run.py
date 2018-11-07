@@ -112,7 +112,7 @@ def coordinates_to_dir(body, item_x, item_y, penguinPositionX, penguinPositionY)
     # Larger x -> smaller right, Larger y -> smaller bottom
     offset_x = item_x - penguinPositionX
     offset_y = item_y - penguinPositionY
-    h = body["mapHeight"] - offset_x - offset_y
+    h = body["mapHeight"]
     print("h:", h, " o_x:", offset_x, " o_y:", offset_y)
     f1 = lambda y: offset_y - offset_x + y
     f2 = lambda y: h - offset_x - offset_y - y
