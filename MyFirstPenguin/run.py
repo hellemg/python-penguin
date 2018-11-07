@@ -69,7 +69,10 @@ def moveTowardsPoint(body, pointX, pointY):
     bodyDirection = body["you"]["direction"]
 
     item_dir = coordinates_to_dir(body, pointX, pointY, penguinPositionX, penguinPositionY)
-
+    print("Item dir:", item_dir)
+    print("Item coord:", pointX ,",", pointY)
+    print("body dir:", bodyDirection)
+    print("body coord:", penguinPositionX, ",", penguinPositionY)
     if item_dir == bodyDirection:
         if bodyDirection == "top":
             plannedAction = MOVE_UP[bodyDirection]
