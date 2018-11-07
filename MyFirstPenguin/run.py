@@ -15,6 +15,7 @@ def doesCellContainWall(walls, x, y):
             return True
     return False
 
+
 def wallInFrontOfPenguin(body):
     xValueToCheckForWall = body["you"]["x"]
     yValueToCheckForWall = body["you"]["y"]
@@ -30,14 +31,19 @@ def wallInFrontOfPenguin(body):
         xValueToCheckForWall += 1
     return doesCellContainWall(body["walls"], xValueToCheckForWall, yValueToCheckForWall)
 
+
 def moveTowardsPoint(body, pointX, pointY):
     penguinPositionX = body["you"]["x"]
     penguinPositionY = body["you"]["y"]
     plannedAction = PASS
     bodyDirection = body["you"]["direction"]
 
+    item_dir = coordinates_to_dir(body, pointX, pointY, penguinPositionX, penguinPositionY)
+
+    # TODO: If penguin
+
     if penguinPositionX < pointX:
-        plannedAction =  MOVE_RIGHT[bodyDirection]
+        plannedAction = MOVE_RIGHT[bodyDirection]
     elif penguinPositionX > pointX:
         plannedAction = MOVE_LEFT[bodyDirection]
     elif penguinPositionY < pointY:
@@ -49,20 +55,38 @@ def moveTowardsPoint(body, pointX, pointY):
         plannedAction = SHOOT
     return plannedAction
 
+
 def moveTowardsCenterOfMap(body):
     centerPointX = math.floor(body["mapWidth"] / 2)
     centerPointY = math.floor(body["mapHeight"] / 2)
     return moveTowardsPoint(body, centerPointX, centerPointY)
 
+
 def coordinates_to_dir(body, item_x, item_y, penguinPositionX, penguinPositionY):
     centerPointX = math.floor(body["mapWidth"] / 2)
     centerPointY = math.floor(body["mapHeight"] / 2)
-    #Defining offset to be positive for coords larger than centre
-    #Larger x -> smaller right, Larger y -> smaller bottom
+    # Defining offset to be positive for coords larger than centre
+    # Larger x -> smaller right, Larger y -> smaller bottom
     offset_x = item_x - centerPointX
     offset_y = item_y - centerPointY
-    max = centerPointY*2 - offset_x - offset_y
-    line_one
+    max = centerPointY * 2 - offset_x - offset_y
+    f1 = lambda y : y + offset_x - offset_y
+    f2 = lambda y : max - offset_x - offset_y - y
+    if item_y >= penguinPositionY:
+        if item_x > f1(item_y):
+            return 'right'
+        elif item_x < f2(item_y):
+            return 'left'
+        return 'bottom'
+    else:
+        if item_x > f2(item_y):
+            return 'right'
+        elif item_x < f1(item_y):
+            return 'left'
+        return 'top'
+
+
+
 
 def chooseAction(body):
     action = PASS
@@ -82,6 +106,7 @@ def chooseAction(body):
             action = moveTowardsCenterOfMap(body)
     return action
 
+
 env = os.environ
 req_params_query = env['REQ_PARAMS_QUERY']
 responseBody = open(env['res'], 'w')
@@ -91,7 +116,7 @@ returnObject = {}
 if req_params_query == "info":
     returnObject["name"] = "Pingu"
     returnObject["team"] = "Team Python"
-elif req_params_query == "command":    
+elif req_params_query == "command":
     body = json.loads(open(env["req"], "r").read())
     returnObject["command"] = chooseAction(body)
 
