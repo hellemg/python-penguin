@@ -61,6 +61,21 @@ def wallInFrontOfPenguin(body):
         xValueToCheckForWall += 1
     return doesCellContainWall(body["walls"], xValueToCheckForWall, yValueToCheckForWall)
 
+def wallInBehindPenguin(body):
+    xValueToCheckForWall = body["you"]["x"]
+    yValueToCheckForWall = body["you"]["y"]
+    bodyDirection = body["you"]["direction"]
+
+    if bodyDirection == "top":
+        yValueToCheckForWall += 1
+    elif bodyDirection == "bottom":
+        yValueToCheckForWall -= 1
+    elif bodyDirection == "left":
+        xValueToCheckForWall += 1
+    elif bodyDirection == "right":
+        xValueToCheckForWall -= 1
+    return doesCellContainWall(body["walls"], xValueToCheckForWall, yValueToCheckForWall)
+
 
 def moveTowardsPoint(body, pointX, pointY):
     penguinPositionX = body["you"]["x"]
@@ -84,13 +99,10 @@ def moveTowardsPoint(body, pointX, pointY):
         elif bodyDirection == "right":
             plannedAction = MOVE_RIGHT[bodyDirection]
 
-    elif item_dir == "bottom" and bodyDirection == "top":
-        plannedAction = RETREAT
-    elif item_dir == "top" and bodyDirection == "bottom":
-        plannedAction = RETREAT
-    elif item_dir == "right" and bodyDirection == "left":
-        plannedAction = RETREAT
-    elif item_dir == "left" and bodyDirection == "right":
+    dir_diff_x = direction_to_coord_tuple(item_dir)[0] + direction_to_coord_tuple(bodyDirection)[0]
+    dir_diff_y = direction_to_coord_tuple(item_dir)[1] + direction_to_coord_tuple(bodyDirection)[1]
+
+    elif (dir_diff_x == 0 and dir_diff_y == 0) and not wallInBehindPenguin(body):
         plannedAction = RETREAT
 
     else:
